@@ -16,5 +16,6 @@ public class AppTest {
 
     @Test
     public void main() {
+        System.out.println("this is test");
     }
 }

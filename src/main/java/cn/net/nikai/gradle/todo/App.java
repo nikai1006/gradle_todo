@@ -10,6 +10,6 @@ package cn.net.nikai.gradle.todo;
  */
 public class App {
     public static void main(String[] args) {
-
+        System.out.println("gradle test");
     }
 }
