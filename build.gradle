@@ -12,7 +12,8 @@ configurations.all {
     }
 }
 repositories {
-    mavenLocal()//本地仓库
+    mavenLocal()
+    //本地仓库
     mavenCentral()//中央仓库
     maven { //自定义仓库
 //        url 'https://repository.sonatype.org/'
@@ -29,6 +30,7 @@ dependencies {
     compile('org.springframework.boot:spring-boot:1.5.9.RELEASE') {
 //        exclude group: 'org.slf4j', module: 'slf4j-api'
     }
+    compile 'org.soil.mock:restclient:1.0.5'
 }
 
 def createDir = {
