@@ -26,11 +26,11 @@ dependencies {
     compile(group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3') {
 //        exclude group: 'org.slf4j', module: 'slf4j-api'
     }
-    compile 'org.hibernate:hibernate-core:4.3.10.Final'
+    compile 'org.hibernate:hibernate-core:4.3.10.Final', 'org.springframework.ws:spring-ws-core:2.2.0.RELEASE', 'org.apache.commons:commons-csv:1.0'
     compile('org.springframework.boot:spring-boot:1.5.9.RELEASE') {
 //        exclude group: 'org.slf4j', module: 'slf4j-api'
     }
-    compile 'org.soil.mock:restclient:1.0.5'
+//    compile 'org.soil.mock:restclient:1.0.5'
 }
 
 def createDir = {
@@ -39,6 +39,17 @@ def createDir = {
         if (!dir.exists())
             dir.mkdirs()
 
+}
+
+buildscript {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'org.apache.commons:commons-csv:1.0'
+    }
 }
 
 //自定义任务
@@ -55,5 +66,18 @@ task makeWebDir() {
     def paths = ['src/main/webapp']
     doLast {
         paths.forEach(createDir)
+    }
+}
+
+import org.apache.commons.csv.*
+
+task printCSV() {
+    doLast {
+        def records = CSVFormat.EXCEL.parse(new FileReader('api.csv'))
+        for (item in records) {
+            print item.get(0) + ' '
+            println item.get(1)
+        }
+
     }
 }
